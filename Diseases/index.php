@@ -13,7 +13,7 @@ if ($result->num_rows > 0) {
 }
 
 // Fetch diseases from the database
-$sql = "SELECT id, disease_name, disease_severity, crop_id FROM diseases";
+$sql = "SELECT * FROM diseases";
 $result = $conn->query($sql);
 
 $diseases = [];
@@ -39,18 +39,23 @@ if ($result->num_rows > 0) {
                 <thead>
                     <tr>
                         <th>ID</th>
+                        <th>Disease Index</th>
                         <th>Disease Name</th>
-                        <th>Severity</th>
-                        <th>Associated Crop</th>
+                        <th>Disease Symptom</th>
+                        <th>Disease Cure</th>
+                        <th>Disease Prevention</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php foreach ($diseases as $disease) { ?>
                         <tr>
-                            <td><?php echo $disease['id']; ?></td>
+                          <td><?php echo $disease['id']; ?></td>
+                            <td><?php echo $disease['disease_index']; ?></td>
                             <td><?php echo $disease['disease_name']; ?></td>
-                            <td><?php echo $disease['disease_severity']; ?></td>
+                            <td><?php echo $disease['disease_symptom']; ?></td>
+                            <td><?php echo $disease['disease_cure']; ?></td>
+                            <td><?php echo $disease['disease_prevention']; ?></td>
                             <td>
                                 <?php
                                     // Find the crop name for this disease

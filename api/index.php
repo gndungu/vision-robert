@@ -13,7 +13,7 @@ if ($result->num_rows > 0) {
 
 // Fetch diseases
 $diseases = [];
-$sql = "SELECT id, disease_name, disease_symptom, disease_cure, disease_severity, crop_id FROM diseases";
+$sql = "SELECT id, disease_index, disease_name, disease_symptom, disease_cure, disease_prevention, crop_id FROM diseases";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {

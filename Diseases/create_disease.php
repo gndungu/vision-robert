@@ -14,20 +14,21 @@ if ($result->num_rows > 0) {
 // Handle form submission for creating a new disease
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Get the form values
+    $disease_index = $_POST['disease_index'];
     $disease_name = $_POST['disease_name'];
     $disease_symptom = $_POST['disease_symptom'];
     $disease_cure = $_POST['disease_cure'];
-    $disease_severity = $_POST['disease_severity'];
+    $disease_prevention = $_POST['disease_prevention'];
     $crop_id = $_POST['crop_id'];
 
     // Prepare SQL to insert the disease into the database
-    $sql = "INSERT INTO diseases (disease_name, disease_symptom, disease_cure, disease_severity, crop_id)
-            VALUES (?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO diseases (disease_index, disease_name, disease_symptom, disease_cure, disease_prevention, crop_id)
+            VALUES (?, ?, ?, ?, ?, ?)";
 
     // Prepare statement
     if ($stmt = $conn->prepare($sql)) {
         // Bind parameters
-        $stmt->bind_param("ssssi", $disease_name, $disease_symptom, $disease_cure, $disease_severity, $crop_id);
+        $stmt->bind_param("sssssi", $disease_index, $disease_name, $disease_symptom, $disease_cure, $disease_prevention, $crop_id);
 
         // Execute the query
         if ($stmt->execute()) {
@@ -52,6 +53,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <h2>Add New Disease</h2>
 
         <form action="create_disease.php" method="POST">
+
+          <div class="mb-3">
+              <label for="disease_index" class="form-label">Disease Index</label>
+              <input type="text" name="disease_index" id="disease_index" class="form-control" required>
+          </div>
+
             <div class="form-group">
                 <label for="disease_name">Disease Name</label>
                 <input type="text" class="form-control" id="disease_name" name="disease_name" required>
@@ -63,19 +70,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </div>
 
             <div class="form-group">
-                <label for="disease_cure">Disease Cure</label>
+                <label for="disease_cure">Disease Management</label>
                 <textarea class="form-control" id="disease_cure" name="disease_cure" rows="4" required></textarea>
             </div>
 
             <div class="form-group">
-                <label for="disease_severity">Disease Severity</label>
-                <select class="form-control" id="disease_severity" name="disease_severity" required>
-                    <option value="Low">Low</option>
-                    <option value="Moderate">Moderate</option>
-                    <option value="High">High</option>
-                    <option value="Severe">Severe</option>
-                </select>
+                <label for="disease_cure">Disease Prevention</label>
+                <textarea class="form-control" id="disease_prevention" name="disease_prevention" rows="4"></textarea>
             </div>
+
+
 
             <div class="form-group">
                 <label for="crop_id">Select Crop</label>

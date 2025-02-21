@@ -33,11 +33,12 @@ CREATE TABLE farmers (
 -- Diseases Table
 CREATE TABLE diseases (
     id INT AUTO_INCREMENT PRIMARY KEY,
+    disease_index INT UNIQUE,
     crop_id INT NOT NULL,
     disease_name VARCHAR(100) NOT NULL,
     disease_symptom TEXT NOT NULL,
     disease_cure TEXT NOT NULL,
-    disease_severity ENUM('Low', 'Moderate', 'High', 'Severe') NOT NULL,
+    disease_prevention TEXT NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     FOREIGN KEY (crop_id) REFERENCES crops(id) ON DELETE CASCADE
@@ -58,6 +59,8 @@ CREATE TABLE treatments (
 CREATE TABLE crop_diseases (
     disease_id INT NOT NULL,
     farmer_id INT NOT NULL,
+    plant_image  VARCHAR(100) NOT NULL,
+    disease_severity ENUM('Low', 'Moderate', 'High', 'Severe') NOT NULL,
     PRIMARY KEY (disease_id, farmer_id),
     FOREIGN KEY (disease_id) REFERENCES diseases(id) ON DELETE CASCADE,
     FOREIGN KEY (farmer_id) REFERENCES farmers(id) ON DELETE CASCADE

@@ -27,6 +27,7 @@ if ($result->num_rows > 0) {
                 <thead>
                     <tr>
                         <th>ID</th>
+                        <th>Index</th>
                         <th>Common Name</th>
                         <th>Scientific Name</th>
                         <th>Actions</th>
